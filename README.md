@@ -1,5 +1,6 @@
 # Z-WAVE-CONTROLLER_GIT
 ![SKKU_LOGO](./sungkyunkwan_logo.jpg)
+This is a final version of graduation portfolio
 
 ## Features
 
