@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfZWaveNode xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ZWaveNode>
+    <Id>4</Id>
+    <ProtocolInfo>
+      <BasicType>0</BasicType>
+      <GenericType>0</GenericType>
+      <SpecificType>0</SpecificType>
+    </ProtocolInfo>
+    <NodeInformationFrame />
+    <SecuredNodeInformationFrame />
+    <CommandClasses />
+    <ManufacturerSpecific />
+  </ZWaveNode>
+  <ZWaveNode>
+    <Id>35</Id>
+    <ProtocolInfo>
+      <BasicType>0</BasicType>
+      <GenericType>0</GenericType>
+      <SpecificType>0</SpecificType>
+    </ProtocolInfo>
+    <NodeInformationFrame />
+    <SecuredNodeInformationFrame />
+    <CommandClasses />
+    <ManufacturerSpecific />
+  </ZWaveNode>
+  <ZWaveNode>
+    <Id>36</Id>
+    <ProtocolInfo>
+      <BasicType>0</BasicType>
+      <GenericType>0</GenericType>
+      <SpecificType>0</SpecificType>
+    </ProtocolInfo>
+    <NodeInformationFrame />
+    <SecuredNodeInformationFrame />
+    <CommandClasses />
+    <ManufacturerSpecific />
+  </ZWaveNode>
+</ArrayOfZWaveNode>

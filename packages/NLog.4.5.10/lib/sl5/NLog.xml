@@ -15422,6 +15422,96 @@
             The most recent archive has the highest number (in combination with the date).
             </summary>
         </member>
+        <member name="T:NLog.Targets.AsyncTaskTarget">
+            <summary>
+            Abstract Target with async Task support
+            </summary>
+        </member>
+        <member name="P:NLog.Targets.AsyncTaskTarget.TaskTimeoutSeconds">
+            <summary>
+            How many seconds a Task is allowed to run before it is cancelled.
+            </summary>
+        </member>
+        <member name="P:NLog.Targets.AsyncTaskTarget.TaskScheduler">
+            <summary>
+            Task Scheduler used for processing async Tasks
+            </summary>
+        </member>
+        <member name="M:NLog.Targets.AsyncTaskTarget.#ctor">
+            <summary>
+            Constructor
+            </summary>
+        </member>
+        <member name="M:NLog.Targets.AsyncTaskTarget.WriteAsyncTask(NLog.LogEventInfo,System.Threading.CancellationToken)">
+            <summary>
+            Override this to create the actual logging task
+            <example>
+            Example of how to override this method, and call custom async method
+            <code>
+            protected override Task WriteAsyncTask(LogEventInfo logEvent, CancellationToken token)
+            {
+               return CustomWriteAsync(logEvent, token);
+            }
+            
+            private async Task CustomWriteAsync(LogEventInfo logEvent, CancellationToken token)
+            {
+                await MyLogMethodAsync(logEvent, token).ConfigureAwait(false);
+            }
+            </code></example>
+            </summary>
+            <param name="logEvent">The log event.</param>
+            <param name="cancellationToken">The cancellation token</param>
+            <returns></returns>
+        </member>
+        <member name="M:NLog.Targets.AsyncTaskTarget.Write(NLog.Common.AsyncLogEventInfo)">
+            <summary>
+            Schedules the LogEventInfo for async writing
+            </summary>
+            <param name="logEvent">The log event.</param>
+        </member>
+        <member name="M:NLog.Targets.AsyncTaskTarget.FlushAsync(NLog.Common.AsyncContinuation)">
+            <summary>
+            Schedules notification of when all messages has been written
+            </summary>
+            <param name="asyncContinuation"></param>
+        </member>
+        <member name="M:NLog.Targets.AsyncTaskTarget.CloseTarget">
+            <summary>
+            Closes Target by updating CancellationToken 
+            </summary>
+        </member>
+        <member name="M:NLog.Targets.AsyncTaskTarget.Dispose(System.Boolean)">
+            <summary>
+            Releases any managed resources
+            </summary>
+            <param name="disposing"></param>
+        </member>
+        <member name="M:NLog.Targets.AsyncTaskTarget.TaskStartNext(System.Threading.Tasks.Task)">
+            <summary>
+            Checks the internal queue for the next <see cref="T:NLog.LogEventInfo"/> to create a new task for
+            </summary>
+            <param name="previousTask">Used for race-condition validation betweewn task-completion and timeout</param>
+        </member>
+        <member name="M:NLog.Targets.AsyncTaskTarget.TaskCreation(NLog.Common.AsyncLogEventInfo)">
+            <summary>
+            Creates new task to handle the writing of the input <see cref="T:NLog.LogEventInfo"/>
+            </summary>
+            <param name="logEvent">LogEvent to write</param>
+            <returns>New Task created [true / false]</returns>
+        </member>
+        <member name="M:NLog.Targets.AsyncTaskTarget.TaskCompletion(System.Threading.Tasks.Task,System.Object)">
+            <summary>
+            Handles that scheduled task has completed (succesfully or failed), and starts the next pending task
+            </summary>
+            <param name="completedTask">Task just completed</param>
+            <param name="continuation">AsyncContinuation to notify of success or failure</param>
+        </member>
+        <member name="M:NLog.Targets.AsyncTaskTarget.TaskTimeout(System.Object)">
+            <summary>
+            Timer method, that is fired when pending task fails to complete within timeout
+            </summary>
+            <param name="state"></param>
+        </member>
         <member name="T:NLog.Targets.ChainsawTarget">
             <summary>
             Sends log messages to the remote instance of Chainsaw application from log4j. 
